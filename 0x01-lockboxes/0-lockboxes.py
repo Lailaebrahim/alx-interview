@@ -1,6 +1,15 @@
 #!/usr/bin/python3
+"""_summary_ module to define method canUnlockAll
+"""
 
 def canUnlockAll(boxes):
+    """
+    Determines if all the boxes in the list can be unlocked.
+    Args:
+      boxes (list): A list of lists representing the boxes and their corresponding keys.
+    Returns:
+      bool: True if all the boxes can be unlocked, False otherwise.
+    """
     unlocked = [False] * len(boxes)
     unlocked[0] = True
     keys = [0]  # Start with the keys from the first box
