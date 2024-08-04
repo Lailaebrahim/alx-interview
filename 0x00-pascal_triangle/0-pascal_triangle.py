@@ -14,6 +14,7 @@ def pascal_triangle(n):
   Returns:
     list: Pascal's triangle up to the given number of rows.
   """
+
   if n <= 0:
     return []
 
