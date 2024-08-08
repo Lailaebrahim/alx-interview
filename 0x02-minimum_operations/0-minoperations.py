@@ -16,17 +16,11 @@ def minOperations(n):
       >>> minOperations(8)
       4
     """
-    if n <= 0:
-        return 0
-
-    operations: int = 0
-    current: int = 1
-
-    while current < n:
-        current *= 2
-        operations += 1
-
-    if current == n:
-        return operations
-
-    return operations + (n - current // 2)
+    minOps = 2
+    totalOps = 0
+    while n > 1:
+        while n % minOps == 0:
+            totalOps += minOps
+            n /= minOps
+        minOps += 1
+    return totalOps
