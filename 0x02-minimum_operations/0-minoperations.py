@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """_summary_ module define a method that calculate
   the min operations to reach a number"""
-  
+
 
 def minOperations(n):
     """
-    Calculates the minimum number of operations required to reach a given number.
+    Calculates the minimum number of operations required
+    to reach a given number.
     Args:
       n (int): The target number.
     Returns:
