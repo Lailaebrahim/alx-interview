@@ -33,7 +33,6 @@ def print_stats(data):
 def signal_handler(sig, frame):
     """Handle keyboard interruption"""
     print_stats(accumulated_data)
-    sys.exit(0)
 
 
 # Set up signal handler for keyboard interruption
