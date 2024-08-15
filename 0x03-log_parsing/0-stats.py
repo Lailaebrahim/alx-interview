@@ -1,48 +1,55 @@
 #!/usr/bin/python3
-"""
-Script parses log data and calculates statistics based on the log entries.
-The script reads log entries from the standard input and processes each line.
-It expects log entries in the following format:
-<IP> - [<Timestamp>] "GET /projects/260 HTTP/1.1" <Status Code> <File Size>
-The script accumulates data for each log entry and calculates statistics.
-After processing 10 log entries, the script prints the accumulated statistics.
-"""
 
 import sys
-import re
 
-# Regular expression pattern for log entry format
-LOG_FORMAT = re.compile(
-    r'(\d+\.\d+\.\d+\.\d+) - \[(.+)\] "GET /projects/260 HTTP/1\.1" '
-    r'(\d+) (\d+)'
-)
-accumulated_data = {"File size": 0, "200": 0, "301": 0,
-                    "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
+
+def print_msg(dict_sc, total_file_size):
+    """
+    Method to print
+    Args:
+        dict_sc: dict of status codes
+        total_file_size: total of the file
+    Returns:
+        Nothing
+    """
+
+    print("File size: {}".format(total_file_size))
+    for key, val in sorted(dict_sc.items()):
+        if val != 0:
+            print("{}: {}".format(key, val))
+
+
+total_file_size = 0
+code = 0
 counter = 0
-
-
-def print_stats(data):
-    """Print accumulated statistics"""
-    print(f"File size: {data['File size']}")
-    for code in sorted(data.keys()):
-        if code != "File size" and data[code] > 0:
-            print(f"{code}: {data[code]}")
-
+dict_sc = {"200": 0,
+           "301": 0,
+           "400": 0,
+           "401": 0,
+           "403": 0,
+           "404": 0,
+           "405": 0,
+           "500": 0}
 
 try:
     for line in sys.stdin:
-        match = LOG_FORMAT.match(line.strip())
-        if match:
-            counter += 1
-            if counter <= 10:
-                status = match.group(3)
-                file_size = int(match.group(4))
-                accumulated_data["File size"] += file_size
-                if status in accumulated_data:
-                    accumulated_data[status] += 1
+        parsed_line = line.split()  # ✄ trimming
+        parsed_line = parsed_line[::-1]  # inverting
 
-            if counter == 10:
-                print_stats(accumulated_data)
+        if len(parsed_line) > 2:
+            counter += 1
+
+            if counter <= 10:
+                total_file_size += int(parsed_line[0])  # file size
+                code = parsed_line[1]  # status code
+
+                if (code in dict_sc.keys()):
+                    dict_sc[code] += 1
+
+            if (counter == 10):
+                print_msg(dict_sc, total_file_size)
                 counter = 0
+
 finally:
-    print_stats(accumulated_data)
+    print_msg(dict_sc, total_file_size)
+
