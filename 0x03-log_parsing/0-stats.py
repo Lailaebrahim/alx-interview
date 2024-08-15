@@ -30,6 +30,8 @@ import re
 accumulated_data = {"File size": 0, "200": 0, "301": 0,
                     "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
 counter = 0
+
+
 def print_stats(accumulated_data):
     """Print accumulated statistics"""
 
@@ -37,9 +39,8 @@ def print_stats(accumulated_data):
 
     for key, value in accumulated_data.items():
         if key != "File size" and value != 0:
-            print("{}: {}".format(key, value)):
-        if key != "File size" and value != 0:
             print("{}: {}".format(key, value))
+
 
 try:
     for line in sys.stdin:
@@ -57,7 +58,6 @@ try:
               counter += 1
         else:
             continue
-        
         if counter == 10:
             print_stats(accumulated_data)
             counter = 0
@@ -65,4 +65,4 @@ try:
                                 "400": 0, "401": 0, "403": 0,
                                 "404": 0, "405": 0, "500": 0}
 finally:
-    print_stats(accumulated_data) 
+    print_stats(accumulated_data)
