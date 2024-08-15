@@ -53,7 +53,7 @@ try:
             if counter == 10:
                 print_stats(accumulated_data)
                 counter = 0
-except KeyboardInterrupt:
-    print_stats(accumulated_data)
+#except KeyboardInterrupt:
+#    print_stats(accumulated_data)
 finally:
     print_stats(accumulated_data)
