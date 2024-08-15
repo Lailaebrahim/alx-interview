@@ -27,6 +27,11 @@ import re
 import re
 
 
+# Regular expression pattern for log entry format
+# Regular expression pattern for log entry format
+LOG_FORMAT = re.compile(
+    r'(\d+\.\d+\.\d+\.\d+) - \[(.+)\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)'
+)
 accumulated_data = {"File size": 0, "200": 0, "301": 0,
                     "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
 counter = 0
@@ -43,6 +48,7 @@ def print_stats(accumulated_data):
 
 try:
     for line in sys.stdin:
+      if LOG_FORMAT.match(line):
         # Remove trailing newline
         line = line.strip()
         # Process the line
@@ -56,7 +62,7 @@ try:
                     accumulated_data[status] += 1
                 counter += 1
         else:
-            continue
+            pass
         if counter == 10:
             print_stats(accumulated_data)
             counter = 0
