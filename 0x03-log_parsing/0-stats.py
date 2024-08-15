@@ -33,7 +33,7 @@ for line in sys.stdin:
     # Remove trailing newline
     line = line.strip()
     # Process the line
-    if counter == 10:
+    if counter <= 10:
         print("File size: {}".format(accumulated_data["File size"]))
         for key, value in accumulated_data.items():
             if key != "File size" and value != 0:
