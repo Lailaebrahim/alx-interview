@@ -52,10 +52,10 @@ try:
             status = data[-2]
             file_size = data[-1]
             if counter <= 10:
-              accumulated_data["File size"] += int(file_size)
-              if status in accumulated_data:
-                  accumulated_data[status] += 1
-              counter += 1
+                accumulated_data["File size"] += int(file_size)
+                if status in accumulated_data:
+                    accumulated_data[status] += 1
+                counter += 1
         else:
             continue
         if counter == 10:
