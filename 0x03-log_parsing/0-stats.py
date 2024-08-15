@@ -62,4 +62,3 @@ finally:
         for key, value in accumulated_data.items():
             if key != "File size" and value != 0:
                 print("{}: {}".format(key, value))
-        sys.exit(0)
