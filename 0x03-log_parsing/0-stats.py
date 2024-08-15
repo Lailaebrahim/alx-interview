@@ -18,9 +18,11 @@ for line in sys.stdin:
             if key != "File size" and value != 0:
                 print("{}: {}".format(key, value))
     accumulated_data = {"File size": 0, "200": 0, "301": 0,
-                        "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
+                        "400": 0, "401": 0, "403": 0,
+                        "404": 0, "405": 0, "500": 0}
     counter = 0
-    if re.match(r"\d+\.\d+\.\d+\.\d+ - \[.*\] \"GET /projects/260 HTTP/1.1\" \d+ \d+", line):
+    if re.match(r"\d+\.\d+\.\d+\.\d+ - \[.*\] \
+      \"GET /projects/260 HTTP/1.1\" \d+ \d+", line):
         data = line.split()
         if len(data) > 1:
             status = data[-2]
