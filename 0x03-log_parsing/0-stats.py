@@ -44,5 +44,7 @@ try:
             if counter == 10:
                 print_stats(accumulated_data)
                 counter = 0
+        else:
+            continue
 finally:
     print_stats(accumulated_data)
