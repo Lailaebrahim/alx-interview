@@ -34,7 +34,6 @@ try:
         # Remove trailing newline
         line = line.strip()
         # Process the line
-        counter = 0
         if re.match(r"\d+\.\d+\.\d+\.\d+ - \[.*\] \
           \"GET /projects/260 HTTP/1.1\" \d+ \d+", line):
             data = line.split()
