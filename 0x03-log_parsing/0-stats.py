@@ -56,6 +56,5 @@ try:
                 counter = 0
 except KeyboardInterrupt:
     print_stats(accumulated_data)
-    sys.exit(0)
 finally:
     print_stats(accumulated_data)
