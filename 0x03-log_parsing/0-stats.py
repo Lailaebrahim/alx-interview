@@ -1,4 +1,25 @@
 #!/usr/bin/python3
+"""
+script parses log data and calculates statistics based on the log entries.
+The script reads log entries from the standard input and processes each line.
+It expects log entries in the following format:
+  <IP Address> - [<Timestamp>] "GET /projects/260 HTTP/1.1" <Status Code> <File Size>
+-The script accumulates data for each log entry 
+  and calculates the following statistics:
+  - File size: The total file size of all log entries.
+  - 200: The number of log entries with a status code of 200.
+  - 301: The number of log entries with a status code of 301.
+  - 400: The number of log entries with a status code of 400.
+  - 401: The number of log entries with a status code of 401.
+  - 403: The number of log entries with a status code of 403.
+  - 404: The number of log entries with a status code of 404.
+  - 405: The number of log entries with a status code of 405.
+  - 500: The number of log entries with a status code of 500.
+After processing 10 log entries, the script prints
+the accumulated statistics and resets the counters.
+Example usage:
+  $ cat access.log | python3 0-stats.py
+"""
 import sys
 import signal
 import re
