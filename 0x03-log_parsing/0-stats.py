@@ -9,13 +9,8 @@ After processing 10 log entries, the script prints the accumulated statistics.
 """
 
 import sys
-import re
 
-# Regular expression pattern for log entry format
-LOG_FORMAT = re.compile(
-    r'(\d+\.\d+\.\d+\.\d+) - \[(.+)\] "GET /projects/260 HTTP/1\.1" '
-    r'(\d+) (\d+)'
-)
+
 accumulated_data = {"File size": 0, "200": 0, "301": 0,
                     "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
 counter = 0
@@ -31,12 +26,12 @@ def print_stats(data):
 
 try:
     for line in sys.stdin:
-        match = LOG_FORMAT.match(line.strip())
-        if match:
+        line = line.split()
+        if len(line) > 2:
             counter += 1
             if counter <= 10:
-                status = match.group(3)
-                file_size = int(match.group(4))
+                status = line[-2]
+                file_size = line[-1]
                 accumulated_data["File size"] += file_size
                 if status in accumulated_data:
                     accumulated_data[status] += 1
