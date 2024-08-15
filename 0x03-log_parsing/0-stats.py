@@ -38,12 +38,12 @@ try:
           \"GET /projects/260 HTTP/1.1\" \d+ \d+", line):
             data = line.split()
             if len(data) > 2:
-                counter += 1
                 status = data[-2]
                 file_size = data[-1]
                 accumulated_data["File size"] += int(file_size)
                 if status in accumulated_data:
                     accumulated_data[status] += 1
+            counter += 1
         else:
             continue
         
