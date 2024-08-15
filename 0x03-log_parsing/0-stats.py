@@ -22,8 +22,12 @@ Example usage:
 """
 import sys
 import signal
+import re
 
 
+LOG_FORMAT = re.compile(
+    r'(\d+\.\d+\.\d+\.\d+) - \[(.+)\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)'
+)
 accumulated_data = {"File size": 0, "200": 0, "301": 0,
                     "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
 counter = 0
@@ -51,16 +55,17 @@ try:
     for line in sys.stdin:
         # Remove trailing newline
         line = line.strip()
-        # Process the line
-        data = line.split()
-        if len(data) > 2:
-            status = data[-2]
-            file_size = data[-1]
-            if counter <= 10:
-                accumulated_data["File size"] += int(file_size)
-                if status in accumulated_data:
-                    accumulated_data[status] += 1
-                counter += 1
+        if LOG_FORMAT.match(line):
+          # Process the line
+          data = line.split()
+          if len(data) > 2:
+              status = data[-2]
+              file_size = data[-1]
+              if counter <= 10:
+                  accumulated_data["File size"] += int(file_size)
+                  if status in accumulated_data:
+                      accumulated_data[status] += 1
+                  counter += 1
         else:
             continue
         if counter == 10:
