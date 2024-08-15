@@ -33,18 +33,16 @@ try:
     for line in sys.stdin:
         match = LOG_FORMAT.match(line.strip())
         if match:
-            status = match.group(3)
-            file_size = int(match.group(4))
-
-            accumulated_data["File size"] += file_size
-            if status in accumulated_data:
-                accumulated_data[status] += 1
             counter += 1
+            if counter <= 10:
+                status = match.group(3)
+                file_size = int(match.group(4))
+                accumulated_data["File size"] += file_size
+                if status in accumulated_data:
+                    accumulated_data[status] += 1
 
             if counter == 10:
                 print_stats(accumulated_data)
                 counter = 0
-        else:
-            continue
 finally:
     print_stats(accumulated_data)
