@@ -9,7 +9,6 @@ After processing 10 log entries, the script prints the accumulated statistics.
 """
 
 import sys
-import signal
 import re
 
 # Regular expression pattern for log entry format
@@ -30,14 +29,6 @@ def print_stats(data):
             print(f"{code}: {data[code]}")
 
 
-def signal_handler(sig, frame):
-    """Handle keyboard interruption"""
-    print_stats(accumulated_data)
-
-
-# Set up signal handler for keyboard interruption
-signal.signal(signal.SIGINT, signal_handler)
-
 try:
     for line in sys.stdin:
         match = LOG_FORMAT.match(line.strip())
@@ -53,7 +44,5 @@ try:
             if counter == 10:
                 print_stats(accumulated_data)
                 counter = 0
-#except KeyboardInterrupt:
-#    print_stats(accumulated_data)
 finally:
     print_stats(accumulated_data)
