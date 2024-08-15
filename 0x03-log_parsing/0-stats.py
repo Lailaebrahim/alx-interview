@@ -12,11 +12,12 @@ for line in sys.stdin:
     # Remove trailing newline
     line = line.strip()
     # Process the line
-    if counter % 10 == 0:
+    if counter == 10:
         print("File size: {}".format(accumulated_data["File size"]))
         for key, value in accumulated_data.items():
             if key != "File size" and value != 0:
                 print("{}: {}".format(key, value))
+    counter = 0
     accumulated_data = {"File size": 0, "200": 0, "301": 0,
                         "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
     if re.match(r"\d+\.\d+\.\d+\.\d+ - \[.*\] \"GET /projects/260 HTTP/1.1\" \d+ \d+", line):
