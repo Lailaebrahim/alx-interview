@@ -18,21 +18,21 @@ def validUTF8(data):
     while i < len(data):
         num = data[i] & 255
         item_b = bin(num)[2:].zfill(8)
-        leading_ones = len(item_b) - len(item_b.lstrip('1'))
-        
-        if leading_ones == 0:
+        lead_ones = len(item_b) - len(item_b.lstrip('1'))
+
+        if lead_ones == 0:
             i += 1
             continue
-        
-        if leading_ones == 1 or leading_ones > 4 or i + leading_ones > len(data):
+
+        if lead_ones == 1 or lead_ones > 4 or i + lead_ones > len(data):
             return False
-        
-        for j in range(1, leading_ones):
+
+        for j in range(1, lead_ones):
             k = i + j
             item_b = bin(data[k])[2:].zfill(8)
             if not item_b.startswith('10'):
                 return False
-        
-        i += leading_ones
-    
+
+        i += lead_ones
+
     return True
