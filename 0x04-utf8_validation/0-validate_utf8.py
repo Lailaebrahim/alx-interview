@@ -25,7 +25,7 @@ def validUTF8(data):
         if lead_ones == 0:
             i += 1
             continue
-        # if only one leading one and not a continuation byte  
+        # if only one leading one and not a continuation byte
         # or leading ones  more than 4 it'a an invalid
         if lead_ones == 1 or lead_ones > 4 or i + lead_ones > len(data):
             return False
