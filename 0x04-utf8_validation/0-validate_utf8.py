@@ -8,9 +8,8 @@ def validUTF8(data):
         data (list of intgers): The data will be represented by a list of integers
     """
     for i in range(len(data)):
-        if data[i] > 255 or data[i] < 0:
-            return False
-        item_b = bin(data[i])[2:].zfill(8)
+        num = data[i] & 255
+        item_b = bin(num)[2:].zfill(8)
         leading_ones = len(item_b) - len(item_b.lstrip('1'))
         if leading_ones == 0:
             continue
