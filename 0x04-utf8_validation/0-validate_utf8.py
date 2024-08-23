@@ -35,6 +35,3 @@ def validUTF8(data):
         i += leading_ones
     
     return True
-
-
-print(validUTF8([240, 188, 128, 167]))
