@@ -7,7 +7,7 @@ def validUTF8(data):
     Args:
         data (list of intgers): The data will be represented by a list of integers
     """
-    for i in range(len(data) - 1):
+    for i in range(len(data)):
         if data[i] > 255 or data[i] < 0:
             return False
         item_b = bin(data[i])[2:].zfill(8)
