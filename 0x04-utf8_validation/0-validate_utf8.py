@@ -3,12 +3,13 @@
 A method that determines if a given data set represents a valid UTF-8 encoding.
 """
 
+
 def validUTF8(data):
     """
     Determines if a given data set represents a valid UTF-8 encoding.
 
     Args:
-        data (list of int): The data will be represented by a list of integers.
+        data (list of int):data will be represented by a list of integers.
 
     Returns:
         bool: True if data is a valid UTF-8 encoding, else False.
