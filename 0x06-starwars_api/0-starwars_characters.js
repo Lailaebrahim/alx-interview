@@ -8,6 +8,7 @@
     4- get the value of the key name for each request to a chracter url
  */
 const request = require('request');
+var characters_names = [];
 const url = 'https://swapi-api.alx-tools.com/api/films/' + process.argv[2];
 request(url, async function (error, response, body) {
   if (error) {
@@ -20,7 +21,7 @@ request(url, async function (error, response, body) {
           if (error) {
             print(error);
           } else {
-            print(JSON.parse(body).name);
+            characters_names.push(JSON.parse(body).name);
           }
           resolve();
         });
@@ -28,3 +29,7 @@ request(url, async function (error, response, body) {
     }
   }
 });
+var i = 0;
+for (i = 0; i < characters_names.length; i++){
+    print(characters_names[i]);
+}
