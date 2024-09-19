@@ -17,6 +17,7 @@ def makeChange(coins, total):
             subTotal = i - coin
             if subTotal < 0:
                 break
-            memo[i] = memo[i] if memo[i] < (memo[subTotal] + 1) else memo[subTotal] + 1
+            memo[i] = memo[i] if memo[i] < (
+                memo[subTotal] + 1) else memo[subTotal] + 1
 
     return memo[total] if memo[total] != sys.maxsize else -1
