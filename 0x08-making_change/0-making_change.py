@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Find min number of coins to get the required sum"""
+import sys
 
 
 def find_min(a, b):
@@ -21,11 +22,12 @@ def makeChange(coins, total):
     memo = {}
     memo[0] = 0
     for i in range(1, total + 1):
+        memo[i] = sys.maxsize
         for coin in coins:
             subTotal = i - coin
             if subTotal < 0:
                 continue
             memo[i] = find_min(memo.get(i), memo.get(
-                subTotal,  float('inf')) + 1)
+                subTotal,  sys.maxsize) + 1)
 
-    return memo[total] if memo[total] != float('inf') else -1
+    return memo[total] if memo[total] != sys.maxsize else -1
