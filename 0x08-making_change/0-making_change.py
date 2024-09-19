@@ -3,18 +3,6 @@
 import sys
 
 
-def find_min(a, b):
-    """
-    Find the minimum of two numbers
-    igonre the none number
-    """
-    if a is None:
-        return b
-    if b is None:
-        return a
-    return min(a, b)
-
-
 def makeChange(coins, total):
     """
     Find the minimum number of coins to get the required sum
@@ -30,7 +18,7 @@ def makeChange(coins, total):
             subTotal = i - coin
             if subTotal < 0:
                 break
-            memo[i] = find_min(memo.get(i), memo.get(
+            memo[i] = min(memo.get(i), memo.get(
                 subTotal,  sys.maxsize) + 1)
 
     return memo[total] if memo[total] != sys.maxsize else -1
