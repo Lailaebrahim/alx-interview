@@ -3,28 +3,32 @@
 import sys
 
 
+def find_min(a, b):
+    """
+    Find the minimum of two numbers
+    igonre the none number
+    """
+    if a is None:
+        return b
+    if b is None:
+        return a
+    return min(a, b)
+
+
 def makeChange(coins, total):
     """
     Find the minimum number of coins to get the required sum
     """
-    # fill memorization with infinity
     memo = [float('inf')] * (total + 1)
-    # set base solution of zero
     memo[0] = 0
-    # order coins in desc for optimization
     coins.sort(reverse=True)
-    # start using bottom up approach
     for i in range(1, total + 1):
-        # iterate over coins
+        memo[i] = sys.maxsize
         for coin in coins:
-            # if coin is less than or equal to i
-            if coin <= i:
-                # choose min between the current number of coins
-                # or prev number of coins stored in memeo[i]
-                memo[i] = min(memo[i], memo[i - coin] + 1)
-            # if a coin value which is greater reached
-            # break the loop as it's desc so all is comming will be greater
-            else:
-                break
-    # return solution for total if it's infinity then no solution return -1
-    return memo[total] if memo[total] != [float('inf')] else -1
+            subTotal = i - coin
+            if subTotal < 0:
+                continue
+            memo[i] = find_min(memo.get(i), memo.get(
+                subTotal,  sys.maxsize) + 1)
+
+    return memo[total] if memo[total] != sys.maxsize else -1
