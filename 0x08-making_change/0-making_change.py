@@ -12,6 +12,10 @@ def makeChange(coins, total):
     memo = {i: sys.maxsize for i in range(1, total + 1)}
     memo[0] = 0
     coins.sort()
+    if coins[0] > total:
+        return -1
+    elif coins[0] == total:
+        return 1
     for i in range(1, total + 1):
         for coin in coins:
             subTotal = i - coin
