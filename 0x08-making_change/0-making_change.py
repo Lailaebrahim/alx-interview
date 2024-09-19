@@ -19,6 +19,8 @@ def makeChange(coins, total):
     """
     Find the minimum number of coins to get the required sum
     """
+    if total <= 0:
+        return 0
     memo = {}
     memo[0] = 0
     for i in range(1, total + 1):
@@ -28,6 +30,6 @@ def makeChange(coins, total):
             if subTotal < 0:
                 continue
             memo[i] = find_min(memo.get(i), memo.get(
-                subTotal,  float('inf')) + 1)
+                subTotal,  sys.maxsize) + 1)
 
-    return memo[total] if memo[total] != float('inf') else -1
+    return memo[total] if memo[total] != sys.maxsize else -1
