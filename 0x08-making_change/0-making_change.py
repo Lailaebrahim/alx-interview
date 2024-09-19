@@ -12,13 +12,14 @@ def makeChange(coins, total):
     memo = {}
     memo[0] = 0
     coins.sort()
+    if coins[0] > total:
+        return -1
     for i in range(1, total + 1):
         memo[i] = sys.maxsize
         for coin in coins:
             subTotal = i - coin
             if subTotal < 0:
                 break
-            memo[i] = min(memo.get(i), memo.get(
-                subTotal,  sys.maxsize) + 1)
+            memo[i] = min(memo[i], memo[subTotal] + 1)
 
     return memo[total] if memo[total] != sys.maxsize else -1
