@@ -25,6 +25,10 @@ def isWinner(x, nums):
     Assuming Maria always goes first and both players play optimally,
     determine who the winner of each game is.
     """
+    if not isinstance(x, int) or x <= 0:
+        return None
+    if not nums or len(nums) < x:
+        return None
     winner = {"Maria": 0, "Ben": 0}
     for i in range(x):
         if nums[i] < 2:
@@ -38,5 +42,7 @@ def isWinner(x, nums):
             winner["Maria"] += 1
     if winner["Maria"] > winner["Ben"]:
         return "Maria"
+    elif winner["Maria"] == winner["Ben"]:
+        return None
     else:
         return "Ben"
